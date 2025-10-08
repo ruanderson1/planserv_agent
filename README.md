@@ -71,7 +71,7 @@ Arquivo principal para iniciar o servidor Flask.
 1. Clone o repositório:
 
    ```bash
-   git clone...
+   git clone https://github.com/ruanderson1/planserv_agent.git
    entre na pasta planserv_project
    ```
 
@@ -100,5 +100,31 @@ Arquivo principal para iniciar o servidor Flask.
     pytest -v
 
    ```
+
+6. ## Padrão de Commits
+
+Para manter o histórico do projeto organizado, utilize o seguinte padrão de commits:
+
+### Formato
+
+### Tipos principais
+
+| Tipo       | Uso                                                | Exemplo                                               |
+| ---------- | -------------------------------------------------- | ----------------------------------------------------- |
+| `feat`     | Nova funcionalidade ou recurso                     | `feat(auth): adicionar login via WhatsApp`            |
+| `fix`      | Correção de bug                                    | `fix(api): corrigir endpoint de leads`                |
+| `docs`     | Alteração em documentação                          | `docs: atualizar README.md`                           |
+| `style`    | Formatação, espaços, ponto e vírgula, etc.         | `style: padronizar indentação no app/routes`          |
+| `refactor` | Refatoração de código sem adicionar funcionalidade | `refactor(services): melhorar leitura do LeadService` |
+| `test`     | Adição ou ajuste de testes                         | `test(api): adicionar teste de fluxo completo`        |
+| `chore`    | Tarefas de manutenção, configs, scripts            | `chore: atualizar dependências do requirements.txt`   |
+
+### Boas práticas
+
+1. Use inglês consistente em todo o projeto.
+2. Limite a descrição curta a 50 caracteres.
+3. Inclua escopo opcional para especificar a área afetada (`auth`, `api`, `db`, `services`).
+4. Use o corpo do commit para explicar o “porquê” da mudança, se necessário.
+5. Use `BREAKING CHANGE:` no rodapé para mudanças que quebram compatibilidade.
 
 ---
