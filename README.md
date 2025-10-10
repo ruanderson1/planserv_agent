@@ -89,16 +89,32 @@ Arquivo principal para iniciar o servidor Flask.
 
    ```bash
     cd planserve_project
+    py run.py
+   ```
+
+   OU
+
+   ```bash
+    cd planserve_project
     py -m app.main
    ```
 
 5. Realizar testes
 
+   com pytest
+
    ```bash
     cd planserve_project
     cd tests
     pytest -v
+   ```
 
+   Com logs
+
+   ```bash
+   cd planserve_project
+   cd tests
+   py api_query_test.py
    ```
 
 6. ## Padrão de Commits

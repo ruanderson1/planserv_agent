@@ -18,7 +18,7 @@ class Lead:
         created_at (datetime): Data/hora da criação do registro.
     """
 
-    def __init__(self, number, name=None, service=None, time=None, phone=None, stage="ask_name"):
+    def __init__(self, number, name=None, service=None, time=None, phone=None, stage="start"):
         self.number = number
         self.name = name
         self.service = service
