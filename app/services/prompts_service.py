@@ -2,11 +2,21 @@ from app.services.openai_service import OpenAIService
 # from app.authentication.auth import Auth
 
 class Prompts_service:
+    """
+        Serviço responsável por gerenciar prompts e interações com o OpenAIService.
+
+        Funcionalidades principais:
+        - generate_documentation: Gera PDF para enviar para o comercial de acordo com o tipo de serviço.
+        - generate_response: Gera respostas personalizadas para perguntas de clientes, mantendo o contexto da empresa Planserv.
+    """
     def __init__(self, gpt_client: OpenAIService, number):
         self.gpt_client = gpt_client
         self.number = number
 
     def generate_documentation(self) -> str:
+        """
+            Gera PDF a partir de um prompt definido.
+        """
         prompt = """
         
         """
@@ -14,13 +24,19 @@ class Prompts_service:
         return response
 
     def generate_response(self, question) -> str:
+        """
+        Gera uma resposta para uma pergunta do usuário.
+
+        Observação:
+        - O username é obtido através da requisição do whatsapp.
+        - Username é definido como "Usuário sem nome" se não estiver disponível.
+        """
         # auth = Auth(self.number)
         # username = auth.get_username()
         # if username == "":
         username = "Usuário se nome"
         print(f" username: {username}")
 
-        # testar mandar usar neuromarketing / neurocopywriting / nudges
         prompt_human = f"""
             Seu nome é Olly, você é um assistente comercial da Planserv, você atende clientes via whatsapp. 
             Você deve se comunicar de forma empática, clara e natural, ajudando os usuários com dúvidas, agendamentos e informações sobre os serviços da empresa.  
@@ -196,14 +212,10 @@ class Prompts_service:
 
             NÃO GERE RESPOSTAS LONGAS, SEJA BREVE E OBJETIVO.
 
-            Contexto:
-            A pergunta do usuário foi = {question}.  
 
-
-        VOCÊ PODE USAR EMOJIS NAS MENSAGENS PARA DEIXAR MAIS AMIGÁVEL E NATURAL A CONVERSA.
-        E TAMBÉM PARÁGRAFOS E QUEBRAS DE LINHA PARA DEIXAR A MENSAGEM MAIS CLARA E ORGANIZADA.
+        OBS: NÃO RESPONDA PERGUNTAS FORA DO CONTEXTO DA EMPRESA, SE FIZEREM TRAGA O CLIENTE DE VOLTA PARA O CONTEXTO DA EMPRESA, OFEREÇA AJUDA COM OS SERVIÇOS DA PLANSERV.
         """
-        response = self.gpt_client.call_human(prompt_human)
+        response = self.gpt_client.call_gpt(prompt_human)
         response = response.replace("**", "*")    
         return response
     
