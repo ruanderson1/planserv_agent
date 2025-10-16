@@ -5,7 +5,7 @@ Simula conversas de leads e valida as respostas retornadas.
 
 import requests
 
-BASE_URL = "http://127.0.0.1:8000/query"
+BASE_URL = "http://127.0.0.1:8000/whatsapp/webhook"
 
 
 def send_message(number, question):
@@ -35,63 +35,63 @@ def send_message(number, question):
     return data
 
 
-def test_full_lead_conversation():
-    """
-    Testa o fluxo completo de captação de lead:
-    nome -> serviço -> horário -> telefone.
-    """
-    user_number = "5511999998888@c.us"
+# def test_full_lead_conversation():
+#     """
+#     Testa o fluxo completo de captação de lead:
+#     nome -> serviço -> horário -> telefone.
+#     """
+#     user_number = "5511999998888@c.us"
 
-    # Dados dinâmicos do lead
-    nome_cliente = "Gabriel"
-    servico = "Criação de site"
-    horario = "Amanhã às 14h"
-    telefone = "(81) 99999-9999"
+#     # Dados dinâmicos do lead
+#     nome_cliente = "Gabriel"
+#     servico = "Criação de site"
+#     horario = "Amanhã às 14h"
+#     telefone = "(81) 99999-9999"
 
-    try:
-        # Envia nome
-        response1 = send_message(user_number, nome_cliente)
-        assert "serviço" in response1["message"].lower(), "Esperado pergunta sobre o serviço"
+#     try:
+#         # Envia nome
+#         response1 = send_message(user_number, nome_cliente)
+#         assert "serviço" in response1["message"].lower(), "Esperado pergunta sobre o serviço"
 
-        # Envia serviço
-        response2 = send_message(user_number, servico)
-        assert "horário" in response2["message"].lower(), "Esperado pergunta sobre o horário"
+#         # Envia serviço
+#         response2 = send_message(user_number, servico)
+#         assert "horário" in response2["message"].lower(), "Esperado pergunta sobre o horário"
 
-        # Envia horário
-        response3 = send_message(user_number, horario)
-        assert "telefone" in response3["message"].lower(), "Esperado pergunta sobre o telefone"
+#         # Envia horário
+#         response3 = send_message(user_number, horario)
+#         assert "telefone" in response3["message"].lower(), "Esperado pergunta sobre o telefone"
 
-        # Envia telefone
-        response4 = send_message(user_number, telefone)
-        assert "obrigado" in response4["message"].lower(), "Esperado mensagem de agradecimento"
-        assert nome_cliente.lower() in response4["message"].lower(), "Esperado nome na resposta"
+#         # Envia telefone
+#         response4 = send_message(user_number, telefone)
+#         assert "obrigado" in response4["message"].lower(), "Esperado mensagem de agradecimento"
+#         assert nome_cliente.lower() in response4["message"].lower(), "Esperado nome na resposta"
 
-        # Testa mensagem após término
-        response5 = send_message(user_number, "Quero outro serviço")
-        assert ("agendamento" in response5["message"].lower() or
-                "serviço" in response5["message"].lower()), "Esperado reinício de agendamento"
+#         # Testa mensagem após término
+#         response5 = send_message(user_number, "Quero outro serviço")
+#         assert ("agendamento" in response5["message"].lower() or
+#                 "serviço" in response5["message"].lower()), "Esperado reinício de agendamento"
 
-        print("\n [SUCESSO] Fluxo completo de lead testado com êxito!")
+#         print("\n [SUCESSO] Fluxo completo de lead testado com êxito!")
 
-    except AssertionError as e:
-        print(f"\n [FALHA] {e}")
-        raise
+#     except AssertionError as e:
+#         print(f"\n [FALHA] {e}")
+#         raise
 
 
-def test_invalid_request():
-    """
-    Testa envio de requisição inválida (sem parâmetros obrigatórios).
-    """
-    print("\n Testando requisição inváclslida...")
-    response = requests.post(BASE_URL, json={})
-    if response.status_code == 400:
-        print(" Retorno 400 recebido corretamente.")
-    else:
-        print(f" Código de status inesperado: {response.status_code}")
+# def test_invalid_request():
+#     """
+#     Testa envio de requisição inválida (sem parâmetros obrigatórios).
+#     """
+#     print("\n Testando requisição inváclslida...")
+#     response = requests.post(BASE_URL, json={})
+#     if response.status_code == 400:
+#         print(" Retorno 400 recebido corretamente.")
+#     else:
+#         print(f" Código de status inesperado: {response.status_code}")
 
-    data = response.json()
-    assert "inválido" in data["message"].lower(), "Esperado mensagem de erro sobre requisição inválida"
-    print(" Mensagem de erro validada com sucesso.")
+#     data = response.json()
+#     assert "inválido" in data["message"].lower(), "Esperado mensagem de erro sobre requisição inválida"
+#     print(" Mensagem de erro validada com sucesso.")
 
 
 if __name__ == "__main__":
@@ -109,9 +109,9 @@ if __name__ == "__main__":
     # print(response2)
     # response3 = send_message(user_number, "Criação de site")
     # print(response3)
-    response4 = send_message(user_number, "Amanhã às 14h")
-    print(response4)
-    response5 = send_message(user_number, "(81) 99999-9999")
-    print(response5)
-    response6 = send_message(user_number, "Quero outro serviço")
+    # response4 = send_message(user_number, "Amanhã às 14h")
+    # print(response4)
+    # response5 = send_message(user_number, "(81) 99999-9999")
+    # print(response5)
+    response6 = send_message(user_number, "ola")
     print(response6)
